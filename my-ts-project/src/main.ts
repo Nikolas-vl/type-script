@@ -710,5 +710,35 @@
 //   age: 5,
 // };
 
+//!-------------------------------------------------
+//!Advanced Types
+//!-------------------------------------------------Type Casting/Type Conversion
+
+// let someValue: unknown = 'this is a string';
+
+// let strLength1: number = (<string>someValue).length; //no
+
+// let strLength2: number = (someValue as string).length;
+
+// let strLength3: number = someValue.length;
+
+// ==================================================
+
+// const input = <HTMLInputElement>document.getElementById('inputEmail'); //no
+// input.value = 'test@test.ts';
+
+// const input = document.getElementById('inputEmail') as HTMLInputElement;//yes
+// input.value = 'test@test.ts';
+
+// ==================================================
+
+// const input = document.getElementById('inputEmail');
+
+// if (input) {
+//   (input as HTMLInputElement).value = 'test@test.ts';
+// }
+
+//!-------------------------------------------------Index Properties
+
 // ==================================================
 //!-------------------------------------------------
