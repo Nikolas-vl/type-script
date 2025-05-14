@@ -793,5 +793,75 @@
 
 //!-------------------------------------------------Generics
 
+// let arr: Array<string | number> = [];
+
+// arr = ['str', 10, true];//error bc true
+
+// ==================================================
+
+// const promise: Promise<string> = new Promise(resolve => {
+//   setInterval(() => {
+//     resolve('Done!');
+//   }, 1000);
+// });
+
+// promise.then(data => {
+//   console.log(data);
+// });
+
+// ==================================================//!Generic function/method
+
+// function identity<T>(arg: T): T {
+//   return arg;
+// }
+
+// let output1 = identity<string>('myString');
+// let output2 = identity<number>(100);
+// //or
+// let output11 = identity("myString");
+// let output22 = identity(100);
+
+// ==================================================
+
+// function firstElement<T>(arr: T[]): T {
+//   return arr[0];
+// }
+
+// let numbers = [1, 2, 3, 4, 5];
+// let firstNum = firstElement(numbers);
+
+// let strings = ['a', 'b', 'c', 'd'];
+// let firstStr = firstElement(strings);
+
+// ==================================================
+
+// function merge<T extends object, U extends object>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge({ name: 'Alisa' }, { age: 28 });
+
+// merged.name;
+
+// ==================================================
+
+type Person = {
+  name: string;
+};
+
+type AdditionFields = {
+  age: number;
+};
+
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+const merged = merge<Person, AdditionFields>({ name: 'Alisa' }, { age: 28 });
+
+merged.name;
+
+//!-------------------------------------------------Extends
+
 // ==================================================
 //!-------------------------------------------------
