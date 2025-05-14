@@ -295,7 +295,7 @@
 
 //!-------------------------------------------------
 //! Типи для методів та функцій
-//!-------------------------------------------------
+//!-------------------------------------------------Return Type
 
 // function greet(): string {
 //   return 'Hi';
@@ -309,3 +309,406 @@
 // };
 
 // ==================================================
+
+// type User = {
+//   id: number;
+//   name: string;
+// };
+
+// const getUserNames = (users: User[]): string[] => {
+//   return users.map(user => user.name);
+// };
+
+// const users: User[] = [
+//   { id: 1, name: 'Alice' },
+//   { id: 2, name: 'Bob' },
+//   { id: 3, name: 'Charlie' },
+// ];
+
+// let results = getUserNames(users);
+
+// ==================================================
+
+// function greet() {
+//   return 'Hello, world!';
+// }
+
+// let result: string = greet();
+
+//!-------------------------------------------------Void
+
+// function logMessage(message: string): void {
+//   console.log(message);
+// }
+
+// logMessage('Hello, world!');
+
+// ==================================================
+
+// function doSomething(callback: () => void) {
+//   callback();
+// }
+
+// doSomething(() => {
+//   console.log(2);
+// });
+
+//!-------------------------------------------------Never
+
+// // Функція, яка завжди викидає помилку
+// function throwError(message: string): never {
+//   throw new Error(message);
+// }
+
+// // Функція з нескінченним циклом
+// function infiniteLoop(): never {
+//   while (true) {}
+// }
+
+//!-------------------------------------------------Function Type
+
+// let myFunc: (firstArg: string, secondArg: number) => void;
+
+// myFunc = (first: string, second: number) => {
+//   console.log(`First: ${first}, Second: ${second}`);
+// };
+
+// myFunc('Hello', 42); // Висновок: "First: Hello, Second: 42"
+
+// ==================================================
+
+// // Визначення типу функції, який приймає два числа та повертає число
+// type CallbackType = (...nums: number[]) => number;
+
+// // Функція, яка приймає два числа та функцію зворотного виклику, застосовує цю функцію до чисел та виводить результат
+// function calc(param1: number, param2: number, callback: CallbackType): void {
+//   console.log('Result:', callback(param1, param2));
+// }
+
+// // Приклади використання calc з різними функціями зворотного виклику
+// calc(1, 2, (num1, num2) => num1 + num2);
+// calc(10, 5, (num1, num2) => num1 - num2);
+
+// ==================================================
+
+// function handleEvent(event: string, ...params: any[]): void {}
+
+// handleEvent('click', () => {
+//   console.log('Clicked!');
+// });
+
+// handleEvent('mouseover', (x: number, y: number) => {
+//   console.log(`Mouse at ${x}, ${y}`);
+// });
+
+//!-------------------------------------------------Custom Types
+
+// type User = {
+//   id: number;
+//   name: string;
+// };
+
+// const user: User = {
+//   id: 1,
+//   name: 'Alice',
+// };
+
+// ==================================================
+
+// type Coordinate = [number, number];
+
+// type UserWithCoords = {
+//   id: number;
+//   name: string;
+//   coords: Coordinate;
+// };
+
+// const userWithCoords: UserWithCoords = {
+//   id: 1,
+//   name: 'Alice',
+//   coords: [10, 20],
+// };
+
+// ==================================================
+
+// enum AnimalIds {
+//   cat = 'cat',
+//   dog = 'dog',
+//   fish = 'fish',
+// }
+
+// type Animal = {
+//   [AnimalIds.cat]: {
+//     meow: () => string;
+//   };
+//   [AnimalIds.dog]: {
+//     bark: () => string;
+//   };
+//   [AnimalIds.fish]: {
+//     swim: () => undefined;
+//   };
+// };
+
+//!-------------------------------------------------
+//! Опціональні параметри та властивості
+//!-------------------------------------------------
+
+// function greet(name?: string) {
+//   if (name) {
+//     return `Hello, ${name}!`;
+//   } else {
+//     return `Hello!`;
+//   }
+// }
+
+// console.log(greet('Alice')); // Виводить: Hello, Alice!
+// console.log(greet()); // Виводить: Hello!
+
+// ==================================================
+
+// type Person = {
+//   name: string;
+//   age?: number; // age є опціональною властивістю
+// };
+
+// const alice: Person = { name: 'Alice', age: 27 };
+// const bob: Person = { name: 'Bob' }; // age не вказано, це припустимо
+
+// ==================================================
+
+// type Person = {
+//   name: string;
+//   age?: number;
+// };
+
+// let user: Person = { name: 'Alice' };
+// user.age = 27;
+
+//!-------------------------------------------------Різниця між Type та Interface
+
+//! ---- '='
+
+// interface Animal {
+//   name: string;
+// }
+
+// type Animal = {
+//   name: string;
+// };
+
+// ==================================================Animal2x
+
+// interface Animal {
+//   name: string;
+// }
+
+// interface Animal {
+//   age: number;
+// }
+
+// let dog: Animal = {
+//   name: 'Fido',
+//   age: 5,
+// };
+
+// ==================================================extends/&
+
+// interface Dog extends Animal {
+//   bark: string;
+// }
+
+// type AnimalName = {
+//   name: string;
+// };
+
+// type AnimalAge = {
+//   age: number;
+// };
+
+// type Animal = AnimalName & AnimalAge;
+
+// let dog: Animal = {
+//   name: 'Fido',
+//   age: 5,
+// };
+
+// ==================================================
+
+// type Cat = {
+//   meow: () => string;
+// };
+
+// interface Dog {
+//   bark: () => string;
+// }
+
+// type DogOrCat = Dog | Cat;
+// type DogAndCat = Dog & Cat;
+
+// !==================================================implements
+
+// interface Animal {
+//   name: string;
+// }
+
+// interface Dog extends Animal {
+//   bark: string;
+// }
+
+// class MyDog implements Dog {
+//   name = 'Fido';
+//   bark = 'Woof!';
+// }
+
+// // Error: Property 'name' is missing in type 'OtherDog'
+// class OtherDog implements Dog {
+//   bark = 'Woof!';
+// }
+
+// ==================================================
+
+// interface Walkable {
+//   walk(): void;
+// }
+
+// interface Eatable {
+//   eat(): void;
+// }
+
+// class Animal implements Walkable, Eatable {
+//   walk() {
+//     console.log('The animal walks...');
+//   }
+
+//   eat() {
+//     console.log('The animal eats...');
+//   }
+// }
+
+// const animal = new Animal();
+
+// ==================================================
+
+// interface AddFunc {
+//   (n1: number, n2: number): number;
+// }
+
+// let add: AddFunc;
+
+// add = (n1: number, n2: number) => {
+//   return n1 + n2;
+// };
+
+//!-------------------------------------------------Інтерфейси
+
+// interface Person {
+//   firstName: string;
+//   lastName: string;
+//   age?: number; // Необов'язкове поле
+// }
+
+// function greet(person: Person) {
+//   console.log(`Hi, ${person.firstName} ${person.lastName}`);
+// }
+
+// const john: Person = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+// };
+
+// greet(john);
+
+// ==================================================
+
+// interface IPerson {
+//   name: string;
+//   age: number;
+//   greet(phrase: string): void;
+// }
+
+// let user: IPerson;
+
+// user = {
+//   name: 'Anthony',
+//   age: 21,
+//   greet(phrase) {
+//     console.log(phrase + ' ' + this.name);
+//   },
+// };
+
+// user.greet('Вітання всім, я');
+
+// ==================================================
+
+// type IPerson = {
+//   name: string;
+//   age: number;
+//   greet(phrase: string): void;
+// };
+
+// let user: IPerson;
+
+// user = {
+//   name: 'Anthony',
+//   age: 21,
+//   greet(phrase) {
+//     console.log(phrase + ' ' + this.name);
+//   },
+// };
+
+// user.greet('Вітання всім, я');
+
+//!-------------------------------------------------Readonly
+
+// interface ITest {
+//   readonly name: string;
+// }
+
+// const person: ITest = {
+//   name: 'Person name',
+// };
+
+// person.name = 'Another Name'; // Error: Cannot assign to 'name' because it is a read-only property.
+
+//!-------------------------------------------------Extending Interfaces
+
+// interface IPerson {
+//   name: string;
+//   age: number;
+//   greet(phrase: string): void;
+// }
+
+// interface IPilot extends IPerson {
+//   flyMessage(): void;
+// }
+
+// ==================================================
+
+// interface AddFunc {
+//   (n1: number, n2: number): number;
+// }
+
+// let add: AddFunc;
+
+// add = (n1: number, n2: number) => {
+//   return n1 + n2;
+// };
+
+// ==================================================
+
+// interface IPerson {
+//   name?: string;
+//   age: number;
+// }
+
+// const mango: IPerson = {
+//   name: 'mango',
+//   age: 2,
+// };
+
+// const poly: IPerson = {
+//   age: 5,
+// };
+
+// ==================================================
+//!-------------------------------------------------
