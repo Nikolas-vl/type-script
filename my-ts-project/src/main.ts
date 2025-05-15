@@ -845,23 +845,224 @@
 
 // ==================================================
 
-type Person = {
-  name: string;
-};
+// type Person = {
+//   name: string;
+// };
 
-type AdditionFields = {
-  age: number;
-};
+// type AdditionFields = {
+//   age: number;
+// };
 
-function merge<T extends object, U extends object>(objA: T, objB: U) {
-  return Object.assign(objA, objB);
-}
+// function merge<T extends object, U extends object>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
 
-const merged = merge<Person, AdditionFields>({ name: 'Alisa' }, { age: 28 });
+// const merged = merge<Person, AdditionFields>({ name: 'Alisa' }, { age: 28 });
 
-merged.name;
+// merged.name;
 
 //!-------------------------------------------------Extends
 
+// type Length = {
+//   length: number;
+// };
+
+// function getLength<T extends Length>(str: T) {
+//   return str.length;
+// }
+
+// getLength('text');
+// getLength([1, 2, 3]);
+// getLength(100); // Errro: Argument of type 'number' is not assignable to parameter of type 'Length'
+
+// ==================================================
+
+// function arrayLogger<T extends Array<string>>(array: T): void {
+//   array.forEach(item => {
+//     console.log(item);
+//   });
+// }
+
+// arrayLogger(['Hello', 'World']); // Ok
+// arrayLogger([1, 2, 3]); // Error
+
+//!-------------------------------------------------keyof
+
+// type Person = {
+//   name: string;
+//   age: number;
+//   location: string;
+// };
+
+// type PersonKeys = keyof Person; // 'name' | 'age' | 'location'
+
+// function getPersonInfo(person: Person, key: PersonKeys) {
+//   return person[key];
+// }
+
+// const john: Person = {
+//   name: 'John',
+//   age: 25,
+//   location: 'NY',
+// };
+
+// console.log(getPersonInfo(john, 'age')); // 25
+// console.log(getPersonInfo(john, 'name')); // 'John'
+// console.log(getPersonInfo(john, 'job')); // Error: Argument of type '"job"' is not assignable to parameter of type 'PersonKeys'.
+
+// ==================================================
+
+// function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
+//   return obj[key];
+// }
+// extractValue({ name: 'John' }, 'name');
+
+//!-------------------------------------------------Generic Classes
+
+// class DataStorage<T> {
+//   private data: T[] = [];
+
+//   addItem(item: T) {
+//     this.data.push(item);
+//   }
+
+//   getItems() {
+//     return [...this.data];
+//   }
+// }
+
+// const textStorage = new DataStorage<string>();
+// textStorage.addItem('Hello');
+// textStorage.addItem('World');
+// console.log(textStorage.getItems()); // ['Hello', 'World']
+// textStorage.addItem(1); // Error: Argument of type 'number' is not assignable to parameter of type 'string'
+
+// const numberStorage = new DataStorage<number>();
+// numberStorage.addItem(1);
+// numberStorage.addItem(2);
+// console.log(numberStorage.getItems()); // [1, 2]
+// numberStorage.addItem('TEXT'); // Error: Argument of type 'number' is not assignable to parameter of type 'number'
+
+// ==================================================
+
+// class KeyValuePair<TKey, TValue> {
+//   constructor(private key: TKey, private value: TValue) {}
+
+//   getKey(): TKey {
+//     return this.key;
+//   }
+
+//   getValue(): TValue {
+//     return this.value;
+//   }
+// }
+
+// const pair1 = new KeyValuePair('name', 'Alice');
+// console.log(pair1.getKey()); // 'name'
+// console.log(pair1.getValue()); // 'Alice'
+
+// const pair2 = new KeyValuePair(1, true);
+// console.log(pair2.getKey()); // 1
+// console.log(pair2.getValue()); // true
+
+//!-------------------------------------------------
+//! Utility Types
+//!-------------------------------------------------Partial<T>
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+//   registered: boolean;
+// };
+
+// function createUser(data: Partial<User>): User {
+//   // Деякі значення за замовчуванням:
+//   const defaultUser: User = {
+//     id: Date.now(),
+//     name: '',
+//     email: '',
+//     registered: false,
+//   };
+//   // З'єднуємо дані користувача та значення за замовчуванням
+//   return { ...defaultUser, ...data };
+// }
+
+// const newUser = createUser({ name: ' alice', email: 'alice@example.com' });
+
+// console.log(newUser);
+
+//!-------------------------------------------------Readonly<T>
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+
+// let alice: User = {
+//   id: 1,
+//   name: 'Alice',
+//   email: 'alice@example.com',
+// };
+
+// alice.name = 'Bob'; // OK
+
+// let aliceReadonly: Readonly<User> = {
+//   id: 1,
+//   name: 'Alice',
+//   email: 'alice@example.com',
+// };
+
+// user.name = 'Bob'; // Error: Cannot assign to 'name' because it is a read-only property.
+
+// ==================================================
+
+// const arr: Readonly<string[]> = ['One', 'Two', 'Three'];
+// arr.push('Four'); // Error: Property 'push' does not exist on type 'readonly string[]'.
+
+//!-------------------------------------------------Pick<T, K>
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+
+// type UserBasicInfo = Pick<User, 'id' | 'name'>;
+
+// let userBasicInfo: UserBasicInfo = {
+//   id: 1,
+//   name: 'John Doe',
+//   email: 'john@example.com', // Error: Property 'email' does not exist on type 'UserBasicInfo'};
+// };
+
+// ==================================================
+
+// type BaseEmployee = {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   position: string;
+//   department: string;
+//   startDate: Date;
+//   // ...і багато інших полів
+// };
+
+// type BaseProject = {
+//   id: number;
+//   name: string;
+//   budget: number;
+//   deadline: Date;
+//   // ...і багато інших полів
+// };
+
+// type Assignment = {
+//   employee: Pick<BaseEmployee, 'id' | 'firstName' | 'lastName'>;
+//   projects: Pick<BaseProject, 'id' | 'name' | 'deadline'>[];
+//   shouldNotifyEmployee?: boolean;
+// };
+
+//!-------------------------------------------------Record<K, T>
 // ==================================================
 //!-------------------------------------------------
