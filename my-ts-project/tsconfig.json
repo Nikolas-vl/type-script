@@ -34,7 +34,7 @@
     "noUncheckedSideEffectImports": true,
     "noImplicitReturns": true,
     "exactOptionalPropertyTypes": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
 
     // Decorators support
     "experimentalDecorators": true,
