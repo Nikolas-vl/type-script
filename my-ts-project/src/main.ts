@@ -1164,4 +1164,36 @@
 
 // ==================================================
 //!-------------------------------------------------
-type ErrorType = Partial<Record<keyof InitialFormType, string[]>>;
+//!-------------------------------------------------
+//!-------------------------------------------------
+
+// type userProfile = {
+//   userName: string;
+//   age: number;
+//   isActive: boolean;
+// };
+
+// function displayUserProfile(user: userProfile) {
+//   return `User name is ${user.userName} his is ${user.age} years old and hi is ${user.isActive}`;
+// }
+
+// const user = {
+//   userName: 'Bob',
+//   age: 12,
+//   isActive: true,
+// };
+
+// console.log(displayUserProfile(user));
+
+// function logName(name: string) {
+//   return `${name}`;
+// }
+
+//!-------------------------------------------------
+
+function calcTotal(arr: number[]) {
+  return arr.reduce((acc, el) => acc + el, 0);
+}
+const numbersArray = [10, 20, 30, 40];
+
+console.log(calcTotal(numbersArray));
