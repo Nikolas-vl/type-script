@@ -1189,11 +1189,96 @@
 //   return `${name}`;
 // }
 
-//!-------------------------------------------------
+// ==================================================
 
-function calcTotal(arr: number[]) {
-  return arr.reduce((acc, el) => acc + el, 0);
-}
-const numbersArray = [10, 20, 30, 40];
+// function calcTotal(arr: number[]) {
+//   return arr.reduce((acc, el) => acc + el, 0);
+// }
 
-console.log(calcTotal(numbersArray));
+// const numbersArray = [10, 20, 30, 40];
+// console.log(calcTotal(numbersArray));
+
+// ==================================================
+
+// type User = {
+//   name: string;
+//   age: number;
+// };
+// //best
+// function calcTotal2(arr: User[]) {
+//   return;
+// }
+// //or
+// function calcTotal1(arr: object[]) {
+//   return;
+// }
+// //or
+// function calcTotal3(arr: { name: string; age: number }[]) {
+//   return;
+// }
+
+// const users = [
+//   { name: 'Bob', age: 12 },
+//   { name: 'Bob', age: 22 },
+//   { name: 'Bob', age: 32 },
+// ];
+
+// ==================================================
+//! unknown
+
+// function safelyParseJson(jsonString: string) {
+//   try {
+//     const result: unknown = JSON.parse(jsonString);
+//     if (typeof result === 'object' && result !== null) {
+//       return result; // Type is verified as an object (non-null)
+//     }
+//   } catch (error) {
+//     console.error('Failed to parse JSON:', error);
+//   }
+//   return null; // Return null if parsing fails or type is incorrect
+// }
+
+//! any
+
+// function logDetails(value: any) {
+//   console.log(`Value: ${value}, Type of value: ${typeof value}`);
+// }
+
+//! enum
+
+// enum VehicleType {
+//   Car = 'Audi',
+//   Truck = 'Scania',
+//   Motorcycle = 'Ducati',
+// }
+
+// function getVehicleType(vehicle: VehicleType) {
+//   return `The vehicle type is: ${vehicle}.`;
+// }
+
+// // Example usage:
+// console.log(getVehicleType(VehicleType.Car)); // Output: "The vehicle type is: Audi."
+// console.log(getVehicleType(VehicleType.Motorcycle)); // Output: "The vehicle type is: Ducati."
+
+//! Union Types
+// function formatInput(input: string | number) {
+//     if (typeof input === 'number') {
+//         return input.toFixed(2); // Formats the number to two decimal places
+//     } else {
+//         return input.toUpperCase(); // Converts the string to uppercase
+//     }
+// }
+
+//! Literal
+
+// function lightShower(color: 'green' | 'yellow' | 'red') {
+//   if (color === 'green') {
+//     console.log('go');
+//   } else if (color === 'yellow') {
+//     console.log('ready');
+//   } else if (color === 'red') {
+//     console.log('stop');
+//   }
+// }
+
+// lightShower('red');
